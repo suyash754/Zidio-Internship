@@ -1,0 +1,67 @@
+STEP 1: Train the Segmentation Model (U-Net)
+📄 File to Run:
+bash
+Copy
+Edit
+python segmentation/train.py
+🔸 What this does:
+
+Loads COCO images + masks
+
+Trains your U-Net model
+
+Saves weights to segmentation_model.pth
+
+✅ STEP 2: Test Segmentation (Optional)
+📄 File to Run:
+bash
+Copy
+Edit
+python segmentation/infer.py
+🔸 What this does:
+
+Loads a sample image
+
+Applies trained U-Net
+
+Visualizes the predicted mask
+
+✅ STEP 3: Run Image Captioning (Optional Test)
+📄 File to Run:
+bash
+Copy
+Edit
+python captioning/infer.py
+🔸 What this does:
+
+Uses BLIP model
+
+Loads a sample image
+
+Generates a caption
+
+✅ STEP 4: Final Output – Caption + Mask Visualization
+📄 File to Run:
+bash
+Copy
+Edit
+python main_pipeline.py
+🔸 What this does:
+
+Loads sample image
+
+Generates caption using BLIP
+
+Generates segmentation mask using U-Net
+
+Displays both side by side
+
+🧭 Summary – Execution Order
+Step	File	Purpose
+1️⃣	segmentation/train.py	Train U-Net on COCO
+2️⃣	segmentation/infer.py	Test segmentation separately (opt)
+3️⃣	captioning/infer.py	Test captioning separately (opt)
+4️⃣	main_pipeline.py	Show final caption + mask result
+
+🛠 Tips for Smooth Execution
+Run all commands from project root:

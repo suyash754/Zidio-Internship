@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://xk-huang.github.io/segment-caption-anything/ -->
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="description" content="Prompting ChatGPT for Multimodal Reasoning and Action">
+    <meta name="keywords" content="SCA, SAM, Segmentation, Caption">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Segment and Caption Anything</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script> -->
+
+
+    <style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.3333333333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-both,:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fad.fa-inverse{color:#fff}</style><link href="./Segment and Caption Anything_files/css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/bulma.min.css">
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/bulma-slider.min.css">
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/academicons.min.css">
+    <link rel="icon" href="https://xk-huang.github.io/segment-caption-anything/static/images/icon.png">
+    <link rel="stylesheet" href="./Segment and Caption Anything_files/index.css">
+
+    <script src="./Segment and Caption Anything_files/jquery.min.js.download"></script>
+    <script defer="" src="./Segment and Caption Anything_files/fontawesome.all.min.js.download"></script>
+    <script src="./Segment and Caption Anything_files/bulma-carousel.min.js.download"></script>
+    <script src="./Segment and Caption Anything_files/bulma-slider.min.js.download"></script>
+    <script src="./Segment and Caption Anything_files/index.js.download"></script>
+
+    <style>
+        /* Define the grid layout */
+        .mygrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            width: 80%;
+            margin: auto;
+        }
+
+        /* Define the grid layout */
+        .mygrid_2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            width: 80%;
+            margin: auto;
+        }
+
+        .grid_item {
+            background: #FFFFFF;
+            opacity: 1;
+        }
+
+        /* Define the size of the GIFs */
+        .mygif {
+            height: auto;
+            cursor: pointer;
+        }
+
+        /* Define the modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80%;
+        }
+
+        /* Define the full-screen overlay styles */
+        .overlay {
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+        }
+
+        .overlay img {
+            width: auto;
+            height: 90%;
+            margin: 0 auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Define the video styles */
+        .gifvideo {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Define the progress bar styles */
+        .progress {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Define the close button style */
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .image-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center; /* This will align the items vertically in the middle */
+        }
+
+        .image-container {
+            flex: 1;
+            text-align: center;
+        }
+        .enlarged {
+            width: 300%;
+            height: auto;
+        } 
+        </style>
+    </head>
+
+    <body data-new-gr-c-s-check-loaded="14.1111.0" data-gr-ext-installed="">
+
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered">
+                            <h1 class="title is-1 publication-title">Segment and
+                                Caption Anything </h1>
+                            <!-- <h2 class="title is-2 publication-title" style="width: 110%; margin-left: -5%">Segment and
+                                Caption Anything </h2> -->
+
+                            <div class="is-size-5">
+                                <span class="author-block">
+                                    <a href="https://xk-huang.github.io/" style="color:#00A4EF;font-weight:normal;">Xiaoke
+                                        Huang</a><sup>1</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="http://jianfengwang.me/" style="color:#00A4EF;font-weight:normal;">Jianfeng
+                                        Wang</a><sup>2</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="https://andytang15.github.io/" style="color:#00A4EF;font-weight:normal;">Yansong Tang</a><sup>1</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="https://stupidzz.github.io/" style="color:#00A4EF;font-weight:normal;">Zheng
+                                        Zhang</a><sup>2</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="https://ancientmooner.github.io/" style="color:#00A4EF;font-weight:normal;">Han
+                                        Hu</a><sup>2</sup>
+                                </span>,
+                                <br>
+                                <span class="author-block">
+                                    <a href="http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/" style="color:#00A4EF;font-weight:normal;">Jiwen Lu</a><sup>1</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="https://www.microsoft.com/en-us/research/people/lijuanw/" style="color:#00A4EF;font-weight:normal;">Lijuan Wang</a><sup>2</sup>
+                                </span>,
+                                <span class="author-block">
+                                    <a href="https://zicliu.wixsite.com/mysite" style="color:#00A4EF;font-weight:normal;">Zicheng Liu</a><sup>3</sup>
+                                </span>
+                            </div>
+
+                            <br>
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block"><sup>1</sup>Tsinghua University,</span>
+                                <span class="author-block"><sup>2</sup>Microsoft,</span>
+                                <span class="author-block"><sup>3</sup>AMD</span>
+                            </div>
+
+
+                            <div class="column has-text-centered">
+                            <h4 class="subtitle is-5 publication-subtitle">
+                                CVPR 2024
+                            </h4>
+                                <div class="publication-links">
+                                    <!-- PDF Link. -->
+                                    <span class="link-block">
+                                        <a href="https://arxiv.org/abs/2312.00869" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="ai ai-arxiv"></i>
+                                            </span>
+                                            <span>arXiv</span>
+                                        </a>
+                                    </span>
+                                    <!-- Code Link. -->
+                                    <span class="link-block">
+                                        <a href="https://github.com/xk-huang/segment-caption-anything" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
+                                            </span>
+                                            <span>Code</span>
+                                        </a>
+                                    </span>
+                                    <!-- Paper Link. -->
+                                    <span class="link-block">
+                                        <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything.240512.pdf" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <svg class="svg-inline--fa fa-file fa-w-12" aria-hidden="true" focusable="false" data-prefix="far" data-icon="file" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"></path></svg><!-- <i class="far fa-file"></i> Font Awesome fontawesome.com -->
+                                            </span>
+                                            <span>Paper (10MB)</span>
+                                        </a>
+                                    </span>
+                                    <!-- Supp Link. -->
+                                    <span class="link-block">
+                                        <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything-supp.240512.pdf" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <svg class="svg-inline--fa fa-file fa-w-12" aria-hidden="true" focusable="false" data-prefix="far" data-icon="file" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"></path></svg><!-- <i class="far fa-file"></i> Font Awesome fontawesome.com -->
+                                            </span>
+                                            <span>Supp (6MB)</span>
+                                        </a>
+                                    </span>
+                                    <span class="link-block">
+                                        <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything.poster.240512.pdf" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <svg class="svg-inline--fa fa-file fa-w-12" aria-hidden="true" focusable="false" data-prefix="far" data-icon="file" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"></path></svg><!-- <i class="far fa-file"></i> Font Awesome fontawesome.com -->
+                                            </span>
+                                            <span>Poster (1MB)</span>
+                                        </a>
+                                    </span>
+                                    <!-- Demo Link. -->
+                                    <span class="link-block">
+                                        <a href="https://github.com/xk-huang/segment-caption-anything/blob/main/docs/DEMO.md" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <svg class="svg-inline--fa fa-images fa-w-18" aria-hidden="true" focusable="false" data-prefix="far" data-icon="images" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M480 416v16c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V176c0-26.51 21.49-48 48-48h16v48H54a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6v-10h48zm42-336H150a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6V86a6 6 0 0 0-6-6zm6-48c26.51 0 48 21.49 48 48v256c0 26.51-21.49 48-48 48H144c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h384zM264 144c0 22.091-17.909 40-40 40s-40-17.909-40-40 17.909-40 40-40 40 17.909 40 40zm-72 96l39.515-39.515c4.686-4.686 12.284-4.686 16.971 0L288 240l103.515-103.515c4.686-4.686 12.284-4.686 16.971 0L480 208v80H192v-48z"></path></svg><!-- <i class="far fa-images"></i> Font Awesome fontawesome.com -->
+                                            </span>
+                                            <span>Demo</span>
+                                        </a>
+                                </span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero teaser">
+            <div class="container is-max-desktop">
+                <!-- <div class="hero-body"> -->
+                    <img id="teaser" width="120%" src="./Segment and Caption Anything_files/teaser-github.svg">
+
+                    <div class="column is-centered">
+                    <div class="column is-five-fifths">
+                    <p class="subtitle">
+                        <b>tl;dr</b>
+                        <br>
+                        1. Despite the absence of semantic labels in the training data, SAM implies high-level semantics sufficient for captioning. 
+                        <br>
+                        2. SCA (b) is a lightweight augmentation of SAM (a) with
+                        the ability to generate regional captions. 
+                        <br>
+                        3. On top of SAM architecture, we add a fixed pre-trained language model, and
+                        an optimizable lightweight hybrid feature mixture whose training is cheap and scalable. 
+                    </p>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div></section>
+
+        <section class="hero news">
+            <div class="container is-max-desktop">
+                <!-- <div class="hero-body"> -->
+                    <div class="column is-centered">
+                    <div class="column is-five-fifths">
+                    <p class="subtitle">
+                        <b>News</b>
+                        <br>
+                        - [01/31/2024] Update the <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything.240512.pdf">paper</a> and the <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything-supp.240512.pdf">supp</a>. Release <a href="https://github.com/xk-huang/segment-caption-anything">code v0.0.2</a>: bump transformers to 4.36.2, support mistral series, phi-2, zephyr; add experiments about SAM+Image Captioner+V-CoT, and more. 
+                        <br>
+                        - [12/05/2023] Release <a href="https://xk-huang.github.io/segment-caption-anything/files/segment-caption-anything.013124.pdf">paper</a>, <a href="https://github.com/xk-huang/segment-caption-anything">code v0.0.1</a>, and project page!
+                    </p>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div></section>
+
+        <section class="section">
+            <div class="container is-max-desktop">
+                <!-- Abstract. -->
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Abstract</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                We propose a method to efficiently equip the Segment Anything Model (SAM) with the ability
+                                to generate regional captions. SAM presents strong generalizability to segment anything
+                                while is short for semantic understanding. By introducing a lightweight query-based feature
+                                mixer, we align the region-specific features with the embedding space of language models for
+                                later caption generation. As the number of trainable parameters is small (typically in the
+                                order of tens of millions), it costs less computation, less memory usage, and less
+                                communication bandwidth, resulting in both fast and scalable training. To address the
+                                scarcity problem of regional caption data, we propose to first pre-train our model on
+                                objection detection and segmentation tasks. We call this step weak supervision pretraining
+                                since the pretraining data only contains category names instead of full-sentence
+                                descriptions. The weak supervision pretraining allows us to leverage many publicly available
+                                object detection and segmentation datasets. We conduct extensive experiments to demonstrate
+                                the superiority of our method and validate each design choice. This work serves as a
+                                stepping stone towards scaling up regional captioning data and sheds light on exploring
+                                efficient ways to augment SAM with regional semantics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Abstract. -->
+                <br>
+                <br>
+                <!-- Paper Model. -->
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-six-fifths">
+                        <h2 class="title is-3">SCA Design</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                <b>SCA is a training-efficient and scalable regional captioning model with a lightweight (typically in the order of tens
+                                    of millions) query-based feature mixer that bridges SAM
+                                    with causal language models.</b>
+                            </p>
+                            <ul>  
+                                <li>The model consists of three main components: an image encoder, a feature mixer, and decoder heads for masks or text.</li>  
+                                <li>The text feature mixer, a lightweight bidirectional transformer, is the crucial element of the model.</li>  
+                                <li>We leverage the tokens from SAM and stack the new mixer above it.</li>  
+                                <li>By optimizing only the additional mixer, the region-specific features are aligned with the language embedding space.</li>  
+                                <li>Due to the small amount of optimizable parameters, the training process is both efficient and scalable.</li>  
+                            </ul>  
+                        </div>
+                        <img id="model" width="90%" src="./Segment and Caption Anything_files/model.jpg">
+                        <p class="has-text-centered">
+                            The model architecture of SCA.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <!-- Paper Model. -->
+
+                <!-- Paper Model 2. -->
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-six-fifths">
+                        <h2 class="title is-3">Performance</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                We conducted extensive experiments to validate the effectiveness of SCA. More results and ablations can be found in
+                                our paper.
+                            </p>
+                        </div>
+
+                        <img id="model" width="80%" src="./Segment and Caption Anything_files/comp-vg.png">
+                        <p class="has-text-centered">
+                            Compare with baselines.
+                        </p>
+                        <br>
+
+                        <div class="image-row">
+                            <div class="image-container">
+                                <img id="model1" width="70%" src="./Segment and Caption Anything_files/comp-vg-rvllm.png">
+                                <p class="has-text-centered">
+                                    Compare different referring Vision Large Language Models (VLLMs).
+                                </p>
+                            </div>
+                            <div class="image-container">
+                                <img id="model2" width="65%" src="./Segment and Caption Anything_files/comp-img-enc.png">
+                                <p class="has-text-centered">
+                                    Compare different image encoders.
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+
+                        <img id="model" width="80%" src="./Segment and Caption Anything_files/comp-reg.png">
+                        <p class="has-text-centered">
+                            Zero-shot performance on Referring Expression Generation (REG) task.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <!-- Paper Model 2. -->
+
+            <!-- Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-six-fifths">
+                    <h2 class="title is-3">Visualization</h2>
+                    <!-- <div class="publication-video">
+            <iframe src="https://user-images.githubusercontent.com/11957155/205432860-ef646e22-15fc-4527-8769-98df83381c09.mp4"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div> -->
+                    <br>
+                    <div class="container is-max-desktop">
+                        <p>
+                                The qualitative results. SCA simultaneously predicts masks (in red contour) and captions. From top-to-bottom, the captions are
+                                from: (1) SAM+Captioner {GIT-large, BLIP-large, BLIP2-OPT-2.7B}, (2) GRIT [89], (3) SCA {GPT2-large+VG, LLAMA-3B+VG, GPT2-
+                                large+Pretrain+VG}, and (4) the ground truth. The bounding boxes (in red) are used to prompt the models. Click for a zoom-in view.
+                        </p>
+                    </div>
+                    <br>
+                    <div class="container is-max-desktop">
+                    <div class="column is-seven-fifths mygrid">
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/32008-671-3091156-2351131.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/215383-4523-1312085-2388424.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/128958-2702-1112297-2392582.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/177123-3717-1322533-2388203.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/hard-81990-1719-3459417-2343409.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/36461-764-2214768-2369488.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/195947-4115-916790-2396648.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/183602-3854-4206513-2327757.png"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/186778-3921-2790530-2357438.png"></div>
+                        <!-- <img class="mygif" src="images/math.png">
+            <img class="mygif" src="images/squirrel_gpt4.png">
+            <img class="mygif" src="images/spatial.png">
+            <img class="mygif" src="images/recipe.png">
+            <img class="mygif" src="images/receipt.png">
+            <img class="mygif" src="images/table.png">
+            <img class="mygif" src="images/product.png">
+            <img class="mygif" src="images/celebrity.png">
+            <img class="mygif" src="images/mushroom.png"> -->
+                    </div>
+                    </div>
+                    <br>
+                    <p>
+                        We provide more examples in our supplementary material.
+                    </p>
+
+                    <!-- <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImg">
+            </div> -->
+                    <div id="overlay" class="overlay">
+                        <span class="close">×</span>
+                        <div id="overlayContent"></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!--/ Paper video. -->
+            
+        </section>
+
+
+            <!-- Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-six-fifths">
+                    <h2 class="title is-3">Demo</h2>
+                    <!-- <div class="publication-video">
+            <iframe src="https://user-images.githubusercontent.com/11957155/205432860-ef646e22-15fc-4527-8769-98df83381c09.mp4"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div> -->
+                    <br>
+                    <div class="container is-max-desktop">
+                        <p>
+                            We provide a gradio demo for SCA with both "prompt mode" and "anything mode" in <a href="https://github.com/xk-huang/segment-caption-anything/blob/main/docs/DEMO.md">Gradio Demo</a>. Click for a zoom-in view. 
+                        </p>
+                    </div>
+                    <br>
+                    <div class="container is-max-desktop">
+                    <div class="column is-six-fifths mygrid_2">
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/demo.small.jpg"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/demo.small.2.jpg"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/anything-mode-00.png.jpg"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/anything-mode-03.png.jpg"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/anything-mode-01.png.jpg"></div>
+                        <div class="grid_item"><img class="mygif" src="./Segment and Caption Anything_files/anything-mode-02.png.jpg"></div>
+                        <!-- <img class="mygif" src="images/math.png">
+            <img class="mygif" src="images/squirrel_gpt4.png">
+            <img class="mygif" src="images/spatial.png">
+            <img class="mygif" src="images/recipe.png">
+            <img class="mygif" src="images/receipt.png">
+            <img class="mygif" src="images/table.png">
+            <img class="mygif" src="images/product.png">
+            <img class="mygif" src="images/celebrity.png">
+            <img class="mygif" src="images/mushroom.png"> -->
+                    </div>
+                    </div>
+
+                    <!-- <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImg">
+            </div> -->
+                    <div id="overlay" class="overlay">
+                        <span class="close">×</span>
+                        <div id="overlayContent"></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!--/ Paper video. -->
+            
+
+
+        <section class="section">
+        <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+            <h2 class="title is-3">Conclusions and Discussion</h2>
+            </div>
+        </div>
+        
+        <div class="container is-max-desktop">
+            <div class="content has-text-justified">
+                <p>
+                    We have demonstrated a scalable regional captioning system leveraging the SAM segmentation model and a lightweight feature mixer, pre-trained with weak supervision for enhanced generalization. Despite some limitations, the system shows strong performance and potential for future development.
+                    </p><ul>
+                        <li>Utilized SAM, a class-agnostic segmentation model, in combination with a lightweight query-based feature mixer to develop a regional captioning system. The system was pre-trained with weak supervision, using 1.8M data, to transfer visual concepts beyond limited regional captioning data.</li>
+                        <li>Our design choices have been extensively validated and evaluated, demonstrating strong performance. Ablation studies showed that the scale of images matters more than the variety of labels for the effectiveness of weak supervision. Leveraging bigger datasets or image captioning data can potentially improve the generalizability of the model.</li>
+                        <li>The system has limitations, including wrong attribute prediction, distinguishing similar visual concepts, and alignment with mask predictions. The issues may be addressed by weak supervision and self-training. The ultimate goal is self-training, which could scale both the data and the generalizability of the model.</li>
+                        <li>Despite the absence of semantic labels in the training data, SAM implies high-level semantics sufficient for captioning. We believe this work serves as a stepping stone towards scaling regional captioning data and exploring emerging abilities in vision from low-level data or pre-trains.</li>
+                    </ul>
+                <p></p>
+            </div>
+            </div>
+
+        
+        </section>
+
+
+        <section class="section" id="BibTeX">
+            <div class="container is-max-desktop content">
+                <h2 class="title">BibTeX</h2>
+                <pre><code>@inproceedings{huang2024segment,
+        title={Segment and caption anything},
+        author={Huang, Xiaoke and Wang, Jianfeng and Tang, Yansong and Zhang, Zheng and Hu, Han and Lu, Jiwen and Wang, Lijuan and Liu, Zicheng},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+        pages={13405--13417},
+        year={2024}
+      }
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="section" id="Acknowledgement">
+            <div class="container is-max-desktop content">
+                <h2 class="title">Acknowledgement</h2>
+                <p>We thank Yutong Lin, Yiji Cheng and Jingcheng Hu for their generously
+                    support and valuable suggestions.
+                </p>
+                <br>
+                <br>
+                <p>
+                    This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+                    licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+            </div>
+        </section>
+
+
+        <script>
+            $(".grid_item").hover(function () {
+                $(this).css("background", "#f2f1f1");
+            },
+                function () {
+                    $(this).css("background", "#FFFFFF");
+                });
+
+            // Get the modal element
+            // var modal = document.getElementById("myModal");
+            var overlay = document.getElementById("overlay");
+            var span = document.getElementsByClassName("close")[0];
+
+
+            // Get the image element and the close button element
+            //  // display the GIF as it is
+            // var img = document.getElementById("modalImg");
+            // var img = document.getElementById("overlayImg");
+            // Add event listeners to each GIF element
+            var gifs = document.getElementsByClassName("mygif");
+            for (var i = 0; i < gifs.length; i++) {
+                gifs[i].addEventListener("click", function () {
+                    var img = document.createElement("img");
+                    img.src = this.src.replace(".png", ".png");
+
+                    // Add a class to the img element
+                    img.className = "enlarged";
+
+                    document.getElementById("overlayContent").appendChild(img);
+                    overlay.style.display = "block";
+                    document.body.style.overflow = "hidden";
+                });
+            }
+
+            // Add event listener to close button
+            span.addEventListener("click", function () {
+                // Remove the img element from the overlay content, hide the overlay, and restore the body overflow
+                document.getElementById("overlayContent").innerHTML = "";
+
+                // Hide the modal
+                // modal.style.display = "none";
+                overlay.style.display = "none";
+                document.body.style.overflow = "auto";
+            });
+        </script>
+    
+
+    
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;limited&quot;,&quot;isActive&quot;:false,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

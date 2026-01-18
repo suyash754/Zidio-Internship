@@ -1,0 +1,19 @@
+# datasets
+data/
+datasets/
+
+# trained models
+*.pth
+*.pt
+*.ckpt
+models/
+checkpoints/
+
+# editor / system
+.vscode/
+__pycache__/
+.ipynb_checkpoints/
+Segment and Caption Anything_files/
+
+# environment
+.env

@@ -1,0 +1,39 @@
+IMAGE CAPTIONING AND SEGMENTATION
+WORKFLOW:
+1. Define the Objective
+2. Data Collection and Preparation
+3. Image Captioning Model Development
+model=InceptionV3(weights='imagenet')
+def extract_features(filename):
+    image=preprocess_image(filename)
+    feature=model_new.predict(image)
+    return feature
+4. Image segmentation model development
+import detectron2
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2 import model_zoo
+cfg=get_cfg()
+cfg.merge_from_file(model_zoo.get_config_file("file")
+weights
+predictor=DefaultPredictor(cfg)
+output=predictor(image)
+
+5. Integrate of both systems
+Create a function for
+a. Accept the Image input
+b. Run caption generation model
+c. Run the segmentation model
+d. Display the results together
+def process_image(image_path):
+    features=extract_features(image_path)
+    caption=generate_caption(features)
+    segmentation_mask=segment_image(image_path)
+    display_results(image_path, segmentation_mask, caption)
+
+6. Video Streaming(Caption and segmentation like object detection and edge and face detection from webcam or external camera)
+
+7. Performance improvements and Experimentation
+8. Final Evaluation
+9. Deployment(Flask/Fast API/ReactJS etc.)
+
